@@ -3,6 +3,13 @@
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+#lets us use relative, not absolute paths
+#PROJECT_PATH is absolute path
+#of parent directory of this file
+import os
+PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
+PROJECT_PATH = os.path.normpath(os.path.join(PROJECT_PATH, '../'))
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -70,6 +77,8 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(PROJECT_PATH, 'static/')
+
 )
 
 # List of finder classes that know how to find static files in
@@ -106,9 +115,7 @@ ROOT_URLCONF = 'simplebx.urls'
 WSGI_APPLICATION = 'simplebx.wsgi.application'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+    os.path.join(PROJECT_PATH, 'templates/')
 )
 
 INSTALLED_APPS = (
@@ -118,7 +125,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Uncomment the next line to enable the admin:
+    'upload',
+    'download'
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
