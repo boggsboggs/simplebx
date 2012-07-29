@@ -25,6 +25,6 @@ class StoredFile(models.Model):
     data = property(get_data, set_data)
 
 
-  class FileForm(ModelForm):
-    class Meta:
-      model = StoredFile
+class FileForm(ModelForm):
+  class Meta:
+    model = StoredFile
