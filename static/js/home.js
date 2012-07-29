@@ -17,6 +17,24 @@ $(function(){
         
       });
   
+ function post_to_server(filename, file_contents){
+    console.log("filename: " + filename + "\nfile contents: " + file_contents);
+
+    URL = '/upload';
+    var post_data = {
+      name: filename,
+      file_data: file_contents
+    };
+
+    $.ajax({  url: URL,
+              data: post_data,
+              dataType: 'json',
+              type: 'POST',
+              success: function(){
+                        }
+    });
+  }
+  
   function read_file(file_obj, encrypt, password, callback) {
     on_completion = function(evt) {
         var file_name = file_obj.name;
@@ -24,7 +42,7 @@ $(function(){
         if (encrypt) {
           file_contents = JSON.stringify(sjcl.encrypt(password, file_contents));
         }
-        callback(file_name, file_contents);
+        callback(file_contents);
     };
     var reader = new FileReader();
     reader.onload = on_completion;
@@ -32,48 +50,45 @@ $(function(){
     reader.readAsText(file_obj);
   }
 
-  
- function post_to_server(filename, file_contents){
-    
-
-    var post_data = {
-      name: filename,
-      file_data: file_contents
-
-    }
-
-
-    $.ajax(
-      url: URL,
-      data: data,
-      dataType = 'json'
-      success = function(){
-
-
-      }
-
-    });      
-
-
-  }
-
-  function upload_file(evt) {
-    var file = evt.target.files[0];
+  function submit_click_handler() {
+    var file = document.getElementById('fileinput').files[0];
     if (file) {
-        encrypt = document.getElementById('encrypt').checked;
-        password = document.getElementById('password').value;
+        var encrypt = document.getElementById('encrypt').checked;
+        var password = document.getElementById('password').value;
 
         console.log("encrypt: " + encrypt + "\npassword: " + password);
-        read_file(file, encrypt, password, post_to_server);
+        read_complete_callback = function(file_contents) {
+          var name = $('#filename').val();
+          post_to_server(name, file_contents);
+        };
+        read_file(file, encrypt, password, read_complete_callback);
     }
-
-
     else {
         alert("Failed to load file");
     }
   }
-  document.getElementById('fileinput').addEventListener('change', upload_file);
 
+  function file_choosen_handler(evt) {
+    var filename = evt.target.files[0].name;
+    $('#filename').val(escape(filename));
+    console.log("file choosen: " + filename);
+  }
+
+  function encrypt_change_handler() {
+    box_checked = $('#encrypt').attr("checked");
+    if (box_checked) {
+      $('#password-p').show();
+    }
+    else {
+      $('#password-p').hide();
+    }
+  }
+
+  $('#password-p').hide();
+  $('#submit-button').click(submit_click_handler);
+  $('#fileinput').change(file_choosen_handler);
+  $('#encrypt').change(encrypt_change_handler);
+  document.getElementById('fileinput').addEventListener('change', file_choosen_handler);
 
   }(window.jQuery, window._));
 });
