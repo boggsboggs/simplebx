@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <body>        
+        <input type="file" id="fileinput" />
+
+        <script type="text/javascript">
+            alert("Alert test");
+            function readSingleFile(evt) {
+                //Retrieve the first (and only!) File from the FileList object
+                console.log("Received change event");
+                var f = evt.target.files[0]; 
+
+                if (f) {
+                  console.log("Inside if f");
+                  var r = new FileReader();
+                  r.onloadstart = function(e) {
+                    console.log("started loading");
+                  };
+                  r.onload = function(e) { 
+                    console.log("Running onload response");
+                      var contents = e.target.result;
+                    alert( "Got the file.n" 
+                          +"name: " + f.name + "n"
+                          +"type: " + f.type + "n"
+                          +"size: " + f.size + " bytesn"
+                          + "starts with: " + contents.substr(1, contents.indexOf("n"))
+                    );  
+                  };
+                  r.onerror = function(e){
+                    console.log(e);
+                  }
+                  r.readAsText(f);
+                } else { 
+                  alert("Failed to load file");
+                }
+              }
+              document.getElementById('fileinput').addEventListener('change', readSingleFile, true);
+        </script>
+    </body>
+</html>
+
