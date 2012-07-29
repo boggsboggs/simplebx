@@ -12,16 +12,18 @@ class StoredFile(models.Model):
             blank=True)
 
     def set_data(self, data):
-        self._data = base64.b64encode(data)
+        self._data = data
 
     def get_data(self):
-        return base64.b64decode(self._data)
+        return data
 
     def set_title(self, title):
         self._title = title
     def get_title(self):
         return self._title  
 
+
+    title = property(get_title, set_title)
     data = property(get_data, set_data)
 
 
