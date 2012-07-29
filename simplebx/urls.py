@@ -6,13 +6,9 @@ from django.conf.urls import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-  url(r'^$', 'simplebx.views.home', name='home'),
+    url(r'^$', 'simplebx.views.home', name='home'),
     url(r'^upload/', include('upload.urls')),
-  url(r'^search/', include('download.urls')),
-
-    # url(r'^simplebx/', include('simplebx.foo.urls')),
-
+    url(r'^search/', include('download.urls')),
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
