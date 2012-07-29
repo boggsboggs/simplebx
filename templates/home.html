@@ -30,13 +30,9 @@
 
         <div class="span4 offset2">
           <!-- Upload a File -->
-          <p>Select a file: <br \> 
-            <input id="fileinput" type="file" />
-            <input id="filename", type="text" />
-          </p>
+          <p>Select a file: <input id="fileinput" type="file"></p>
           <p>Encrypt the uploaded file: <input id="encrypt" type="checkbox" value="encrypt" /></p>
-          <p id="password-p" display="none">Password: <input id="password" type="password"></p>
-          <p><input id="submit-button" type="button" value="Submit" /></p>
+          <p>Password: <input id="password" type="password"></p>
 
               <div class="fileupload fileupload-new" data-provides="fileupload" id="upload" visibility="hidden">
 
@@ -72,3 +68,8 @@
         <p>© Company 2012</p>
       </footer>
 {% endblock content %}
+
+
+{% block js %}
+<script type="text/javascript" src="{{STATIC_URL}}js/home.js"></script>
+{% endblock js %}

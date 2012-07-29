@@ -8,12 +8,7 @@
 
   //query the database for the given value, get all matches
   function search_query(value){
-
-    data: {
-      squery: value,
-
-    };
-
+    
    
 
 
