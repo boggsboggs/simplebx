@@ -18,7 +18,12 @@
     <style type="text/css">
       .input-append button.add-on {
       height: inherit !important;
-}
+      }
+
+      ul li{
+
+        float: left;
+      }
 
     </style>
     <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
@@ -93,4 +98,11 @@
 
     <script type="text/javascript" src="{{STATIC_URL}}js/sjcl.js"></script>
     <script type="text/javascript" src="http://underscorejs.org/underscore.js"></script>
+
+    {% block js %}
+    {% endblock js %}
     <script type="text/javascript" src="{{STATIC_URL}}js/home.js"></script>
+
+
+
+

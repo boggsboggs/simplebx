@@ -5,11 +5,10 @@ from django.conf.urls import patterns, include, url
 # from django.contrib import admin
 # admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns('download.views',
     # Examples:
-  url(r'^$', 'simplebx.views.home', name='home'),
-    url(r'^upload/', include('upload.urls')),
-  url(r'^search/', include('download.urls')),
+    
+    url(r'^$', 'searchhandler', name='searchhandler'),
 
     # url(r'^simplebx/', include('simplebx.foo.urls')),
 
