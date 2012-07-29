@@ -1,41 +1,42 @@
 <!DOCTYPE html>
 <html>
-    <body>        
-        <input type="file" id="fileinput" />
+    <body> 
+      <script type="text/javascript" src="static/js/sjcl.js"></script>
 
-        <script type="text/javascript">
-            alert("Alert test");
-            function readSingleFile(evt) {
-                //Retrieve the first (and only!) File from the FileList object
-                console.log("Received change event");
-                var f = evt.target.files[0]; 
+      <input type="file" id="fileinput" />
 
+      <script type="text/javascript">
+            function read_file(file_obj, encrypt, password, callback) {
+                on_completion = function(evt) {
+                    var file_name = file_obj.name;
+                    var file_contents = evt.target.result;
+                    if (encrypt) {
+                        file_contents = sjcl.encrypt(password, file_contents);
+                    }
+                    callback(file_name, file_contents);
+                };
+
+                var reader = new FileReader();
+                reader.onload = on_completion;
+                reader.onerror = alert("The file upload resulted in an error.");
+                reader.readAsArrayBuffer(file_obj);
+            }
+
+            function upload_to_server(file_name, data) {
+              console.log("name: " + file_name + "\ndata: " + data)
+            }
+
+            function upload_file(evt) {
+                var file = evt.target.files[0]; 
                 if (f) {
-                  console.log("Inside if f");
-                  var r = new FileReader();
-                  r.onloadstart = function(e) {
-                    console.log("started loading");
-                  };
-                  r.onload = function(e) { 
-                    console.log("Running onload response");
-                      var contents = e.target.result;
-                    alert( "Got the file.n" 
-                          +"name: " + f.name + "n"
-                          +"type: " + f.type + "n"
-                          +"size: " + f.size + " bytesn"
-                          + "starts with: " + contents.substr(1, contents.indexOf("n"))
-                    );  
-                  };
-                  r.onerror = function(e){
-                    console.log(e);
-                  }
-                  r.readAsText(f);
-                } else { 
+                  read_file(f, true, "password", upload_to_server);
+                } 
+                else { 
                   alert("Failed to load file");
                 }
               }
-              document.getElementById('fileinput').addEventListener('change', readSingleFile, true);
-        </script>
+              document.getElementById('fileinput').addEventListener('change', upload_file, false);
+      </script>
     </body>
 </html>
 

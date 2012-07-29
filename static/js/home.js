@@ -2,9 +2,6 @@
 
 
 $(function(){
-
-
-
   (function($, _){
 
        $('#search').css('visibility', 'hidden');
@@ -19,53 +16,38 @@ $(function(){
         $('#search').css('visibility', 'hidden');
         
       });
-
-
-
-      //file upload handlers
-      function readSingleFile(evt) {
-                //Retrieve the first (and only!) File from the FileList object
-          console.log("Received change event");
-          var f = evt.target.files[0]; 
-
-          if (f) {
-            console.log("Inside if f");
-            var r = new FileReader();
-            r.onloadstart = function(e) {
-              console.log("started loading");
-            };
-            r.onload = function(e) { 
-              console.log("Running onload response");
-                var contents = e.target.result;
-              alert( "Got the file.n" 
-                    +"name: " + f.name + "n"
-                    +"type: " + f.type + "n"
-                    +"size: " + f.size + " bytesn"
-                    + "starts with: " + contents.substr(1, contents.indexOf("n"))
-              );  
-            };
-            r.onerror = function(e){
-              console.log('file upload error');
-            }
-            r.readAsText(f);
-          } else { 
-            alert("Failed to load file");
-          }
-        }
-        document.getElementById('fileinput').addEventListener('change', readSingleFile, true);
-
-
-
-
       function post_to_server(filename, file_as_arrbuffer){
-        
-
-
       }
-
-
   }(window.jQuery, window._));
-
-
 });
+            
 
+function read_file(file_obj, encrypt, password, callback) {
+    on_completion = function(evt) {
+        var file_name = file_obj.name;
+        var file_contents = evt.target.result;
+        if (encrypt) {
+          file_contents = JSON.stringify(sjcl.encrypt(password, file_contents));
+        }
+        callback(file_name, file_contents);
+    };
+    var reader = new FileReader();
+    reader.onload = on_completion;
+    reader.onerror = function(err) { console.log(err); };
+    reader.readAsText(file_obj);
+}
+
+function upload_to_server(file_name, data_string) {
+    console.log("name: " + file_name + "\ndata: " + data);
+}
+
+function upload_file(evt) {
+    var file = evt.target.files[0];
+    if (file) {
+        read_file(file, true, "password", upload_to_server);
+    }
+    else {
+        alert("Failed to load file");
+    }
+}
+document.getElementById('fileinput').addEventListener('change', upload_file);
