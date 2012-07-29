@@ -4,11 +4,11 @@
 $(function(){
   (function($, _){
 
-       $('#search').css('visibility', 'hidden');
-        $('#upload').css('visibility', 'hidden');
+      $('#search').css('visibility', 'hidden');
+      $('#upload').css('visibility', 'hidden');
       $('#search-btn').click(function(){
-        $('#search').css('visibility', 'visible');
-        $('#upload').css('visibility', 'hidden');
+      $('#search').css('visibility', 'visible');
+      $('#upload').css('visibility', 'hidden');
 
       });
       $('#upload-btn').click(function(){
@@ -32,8 +32,29 @@ $(function(){
     reader.readAsText(file_obj);
   }
 
-  function upload_to_server(file_name, data_string) {
-    console.log("name: " + file_name + "\ndata: " + data_string);
+  
+ function post_to_server(filename, file_contents){
+    
+
+    var post_data = {
+      name: filename,
+      file_data: file_contents
+
+    }
+
+
+    $.ajax(
+      url: URL,
+      data: data,
+      dataType = 'json'
+      success = function(){
+
+
+      }
+
+    });      
+
+
   }
 
   function upload_file(evt) {
@@ -43,13 +64,16 @@ $(function(){
         password = document.getElementById('password').value;
 
         console.log("encrypt: " + encrypt + "\npassword: " + password);
-        read_file(file, encrypt, password, upload_to_server);
+        read_file(file, encrypt, password, post_to_server);
     }
+
+
     else {
         alert("Failed to load file");
     }
   }
   document.getElementById('fileinput').addEventListener('change', upload_file);
+
 
   }(window.jQuery, window._));
 });

@@ -26,3 +26,5 @@ class StoredFile(models.Model):
     name = property(get_name, set_name)
     data = property(get_data, set_data)
 
+    def __unicode__(self):
+        return self._name
