@@ -16,12 +16,8 @@ $(function(){
         $('#search').css('visibility', 'hidden');
         
       });
-
-  }(window.jQuery, window._));
-});
-            
-
-function read_file(file_obj, encrypt, password, callback) {
+  
+  function read_file(file_obj, encrypt, password, callback) {
     on_completion = function(evt) {
         var file_name = file_obj.name;
         var file_contents = evt.target.result;
@@ -34,19 +30,29 @@ function read_file(file_obj, encrypt, password, callback) {
     reader.onload = on_completion;
     reader.onerror = function(err) { console.log(err); };
     reader.readAsText(file_obj);
-}
+  }
 
-function upload_to_server(file_name, data_string) {
-    console.log("name: " + file_name + "\ndata: " + data);
-}
+  function upload_to_server(file_name, data_string) {
+    console.log("name: " + file_name + "\ndata: " + data_string);
+  }
 
-function upload_file(evt) {
+  function upload_file(evt) {
     var file = evt.target.files[0];
     if (file) {
-        read_file(file, true, "password", upload_to_server);
+        encrypt = document.getElementById('encrypt').checked;
+        password = document.getElementById('password').value;
+
+        console.log("encrypt: " + encrypt + "\npassword: " + password);
+        read_file(file, encrypt, password, upload_to_server);
     }
     else {
         alert("Failed to load file");
     }
-}
-document.getElementById('fileinput').addEventListener('change', upload_file);
+  }
+  document.getElementById('fileinput').addEventListener('change', upload_file);
+
+  }(window.jQuery, window._));
+});
+            
+
+
