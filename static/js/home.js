@@ -16,8 +16,7 @@ $(function(){
         $('#search').css('visibility', 'hidden');
         
       });
-      function post_to_server(filename, file_as_arrbuffer){
-      }
+
   }(window.jQuery, window._));
 });
             
