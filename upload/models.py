@@ -6,7 +6,7 @@ import base64
 
 
 class StoredFile(models.Model):
-    _title = models.CharField(max_length=100)
+    _name = models.CharField(max_length=100)
     _data = models.TextField(
             db_column='data',
             blank=True)
@@ -17,16 +17,12 @@ class StoredFile(models.Model):
     def get_data(self):
         return data
 
-    def set_title(self, title):
-        self._title = title
-    def get_title(self):
-        return self._title  
+    def set_name(self, name):
+        self._name = name
+    def get_name(self):
+        return self._name  
 
 
-    title = property(get_title, set_title)
+    name = property(get_name, set_name)
     data = property(get_data, set_data)
 
-
-class FileForm(ModelForm):
-  class Meta:
-    model = StoredFile

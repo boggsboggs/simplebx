@@ -1,11 +1,15 @@
 # Create your views here.
 # Create your views here.
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render_to_response
-from annoying.decorators import render_to
+from django.db import models
 from django.template import RequestContext
-from urls.models import *
+
+from annoying.decorators import render_to
+from upload.models import *
 import pickle
+
+
 
 def filehandler(request):
 
@@ -19,6 +23,18 @@ def filehandler(request):
     newfile.data = pickled_contents
     newfile.name = params.name
 
-    
-  return HttpResponse('hello world')
+    try:
+      newfile.full_clean()  
+
+    except ValidationError as e:
+      return HttpResponse(str(e))
+
+    newfile.save()
+    return HttpResponse('file saved')
+
+  else:
+    raise Http404
+
+
+
 
