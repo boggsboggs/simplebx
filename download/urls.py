@@ -8,8 +8,9 @@ from django.conf.urls import patterns, include, url
 urlpatterns = patterns('download.views',
     # Examples:
     
-    url(r'^$', 'searchhandler', name='searchhandler'),
-
+    url(r'^search/', 'searchhandler', name='searchhandler'),
+    
+    
     # url(r'^simplebx/', include('simplebx.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
