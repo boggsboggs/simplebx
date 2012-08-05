@@ -12,7 +12,7 @@ from upload.models import StoredFile
 import pickle
 
 from pprint import pprint
-
+import pdb
 
 # Don't require a csrf validation token
 @csrf_exempt
@@ -21,11 +21,10 @@ def filehandler(request):
         filename = request.POST['filename']
         pickled_filedata = pickle.dumps(request.POST['file_data'])
         print "filename: " + filename, "\nfile_data: " + pickled_filedata
-        return HttpResponse('file saved')
-        
-        StoredFile.objects.create(name=filename, file_data=pickled_filedata)
 
-        print "check1"
+        pdb.set_trace()
+        StoredFile.objects.create(filename=filename, file_data=pickled_filedata)
+        return HttpResponse('file saved')
 
     else:
         raise Http404

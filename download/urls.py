@@ -6,11 +6,9 @@ from django.conf.urls import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('download.views',
-    # Examples:
-    
-    url(r'^search/', 'searchhandler', name='searchhandler'),
+    url(r'^search/', 'search', name='search'),
+    url(r'^search/query/', 'query', name='query'),
     url(r'get/', 'getfile', name='getfile',)
-    
     # url(r'^simplebx/', include('simplebx.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

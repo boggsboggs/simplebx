@@ -11,4 +11,4 @@ class StoredFile(models.Model):
             blank=True)
 
     def __unicode__(self):
-        return self._name
+        return self.filename
