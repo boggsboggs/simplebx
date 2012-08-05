@@ -9,7 +9,7 @@ urlpatterns = patterns('download.views',
     # Examples:
     
     url(r'^search/', 'searchhandler', name='searchhandler'),
-    
+    url(r'get/', 'getfile', name='getfile',)
     
     # url(r'^simplebx/', include('simplebx.foo.urls')),
 

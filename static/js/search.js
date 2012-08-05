@@ -9,11 +9,22 @@
   //query the database for the given value, get all matches
   function search_query(value){
     
-    url = '/download';
+    url = 'query/';
     data = {
       searchEntry : value
     }
-    $.get()
+
+    $.get(url, data, function(){
+
+      results = data['search_results'];
+      
+      _.each(results)
+      if(data['filename'] && data['link']){
+        html_results = _.template($('#search-result-template').html(), data);
+      }
+
+
+    });
    
 
 
