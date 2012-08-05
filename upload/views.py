@@ -4,37 +4,28 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import render_to_response
 from django.db import models
 from django.template import RequestContext
+from django.views.decorators.csrf import csrf_exempt
+
 
 from annoying.decorators import render_to
-from upload.models import *
+from upload.models import StoredFile
 import pickle
 
+from pprint import pprint
 
 
+# Don't require a csrf validation token
+@csrf_exempt
 def filehandler(request):
+    if request.method == 'POST':
+        filename = request.POST['filename']
+        pickled_filedata = pickle.dumps(request.POST['file_data'])
+        print "filename: " + filename, "\nfile_data: " + pickled_filedata
+        return HttpResponse('file saved')
+        
+        StoredFile.objects.create(name=filename, file_data=pickled_filedata)
 
-  if request.method == 'POST':
-    params = request.POST
-    newfile = StoredFile()
+        print "check1"
 
-
-    pickled_contents = pickle(params.file_data)
-
-    newfile.data = pickled_contents
-    newfile.name = params.name
-
-    try:
-      newfile.full_clean()  
-
-    except ValidationError as e:
-      return HttpResponse(str(e))
-
-    newfile.save()
-    return HttpResponse('file saved')
-
-  else:
-    raise Http404
-
-
-
-
+    else:
+        raise Http404

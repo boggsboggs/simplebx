@@ -14,19 +14,13 @@ $(function(){
     function post_to_server(filename, file_contents){
       console.log("filename: " + filename + "\nfile contents: " + file_contents);
 
-      URL = '/upload';
+      URL = 'upload/';
       var post_data = {
-        name: filename,
+        filename: filename,
         file_data: file_contents
       };
 
-      $.ajax({  url: URL,
-                data: post_data,
-                dataType: 'json',
-                type: 'POST',
-                success: function(){
-                          }
-      });
+      $.post(URL, post_data);
     }
     
     function read_file(file_obj, encrypt, password, callback) {

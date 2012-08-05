@@ -6,12 +6,7 @@ from django.conf.urls import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('upload.views',
-    # Examples:
-    
     url(r'^$', 'filehandler', name='filehandler'),
-
-    # url(r'^simplebx/', include('simplebx.foo.urls')),
-
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
