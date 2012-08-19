@@ -5,3 +5,4 @@ venv/*
 local_settings.py
 .gitignore
 .DS_Store
+*.sublime-*

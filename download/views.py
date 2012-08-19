@@ -4,23 +4,36 @@ from django.shortcuts import render_to_response
 from annoying.decorators import render_to
 from django.template import RequestContext
 import json
-from upload import models
-
+from upload.models import *
+import pdb
 def search(request):
   return render_to_response('search.html', {},  context_instance=RequestContext(request))
 
 
 def query(request):
-    if 'serachEntry' in request.GET:
-        search_entry = request.GET['searchEntry']
-        stored_files = models.StoredFile.objects.filter(filename__istartswith=search_entry)
-        file_dicts = [{'filename': sf.filename, 'link': '/download/get/%s' % sf.filename}
-                       for sf in stored_files]
-        json_dicts = json.dumps()
+    query = request.GET.get('query', '')
+    
+    
+    start_index = request.GET.get('start_index', 0)
+    end_index = request.GET.get('end_index', 10)
+    #make sure start < end
+    if start_index > end_index:
+      end_index = start_index + 10
 
+    
+    query = str(query)
+    
+    matching_files = StoredFile.objects.filter(filename__istartswith=query)
+    #order, limit, and offset parts of query
+    matching_files.order_by('filename')[start_index:end_index]
+    file_dicts = [{'filename': sf.filename, 'link': \
+                  '/download/get/%s' % sf.filename}
+                   for sf in matching_files]
+    data = {'search_results': file_dicts}
+    json_dicts = json.dumps(data)
 
-    else:
-        raise Http404
+    return HttpResponse(json_dicts, content_type='application/json')
+  
 
     return HttpResponse('end')
 

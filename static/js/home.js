@@ -41,8 +41,8 @@ $(function(){
     function submit_click_handler() {
       var file = document.getElementById('fileinput').files[0];
       if (file) {
-          var encrypt = document.getElementById('encrypt').checked;
-          var password = document.getElementById('password').value;
+          var encrypt = $('#chkSelect').attr('checked')?true:false;
+          var password =$('#password').value;
 
           console.log("encrypt: " + encrypt + "\npassword: " + password);
           read_complete_callback = function(file_contents) {
@@ -66,15 +66,18 @@ $(function(){
     }
 
     function encrypt_change_handler() {
-      box_checked = $('#encrypt').attr("checked");
+      var box_checked = $('#chkSelect').attr('checked')?true:false;
       if (box_checked) {
         $('#password-p').show();
         $('#password').select();
       }
       else {
+        $('#encrypt').prop('checked', 'unchecked');
         $('#password-p').hide();
       }
     }
+
+
 
     // Add event listeners
     $('#submit-button').click(submit_click_handler);

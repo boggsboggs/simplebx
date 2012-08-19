@@ -8,7 +8,7 @@
            <div class='input-append' >
             <input id="search-input" placeholder="Search..." />
             <button class='btn add-on'>
-              <i class="icon-search"></i>
+              <i class="icon-search" id="search-image"></i>
            </button>
          </div>
   </div>
@@ -16,7 +16,7 @@
 
 <div class= "row">
   <div class="span3">
-    <table class="table zebra-striped table-striped" id="data-table" >
+    <table class="table" id="data-table" >
     <thead>
       <tr>
         <th> Matched Files </th>        
@@ -31,15 +31,18 @@
   </div>
 </div>
 
+
+{% endblock content %}
+
+{% block js %}
 <script id="search-result-template" type="text/template">
   <tr> 
 
-    <td><img src="{{STATIC_URL}}ico/document.ico"/></td>
+    <td><img src="{{STATIC_URL}}ico/document.ico" width="44" height="45"/></td>
     <td> <%= filename %> </td>
   </tr>
 </script>
 
 
 <script type="text/javascript" src="{{STATIC_URL}}js/search.js"></script>
-
-{% endblock content %}
+{% endblock js %}

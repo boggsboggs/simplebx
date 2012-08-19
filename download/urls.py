@@ -6,8 +6,8 @@ from django.conf.urls import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('download.views',
-    url(r'^search/', 'search', name='search'),
-    url(r'^search/query/', 'query', name='query'),
+    url(r'^search/$', 'search', name='search'),
+    url(r'^search/query/$', 'query', name='query'),
     url(r'get/', 'getfile', name='getfile',)
     # url(r'^simplebx/', include('simplebx.foo.urls')),
 
