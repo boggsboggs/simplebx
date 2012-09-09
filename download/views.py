@@ -7,9 +7,13 @@ import json
 from django.core.urlresolvers import reverse
 from upload.models import *
 
-def search(request, query):
+def search(request, initial_query):
   query = request.GET.get('query', '')
-  q_results = query_lookup(query)
+  if query:
+    q_results = query_lookup(query)
+  else:
+    q_results = construct_file_dict(StoredFile.objects.all())
+    q_results = wrap_data(q_results)
   return render_to_response('search.html', {'search_results':q_results['search_results']},
     context_instance=RequestContext(request))
 
@@ -33,7 +37,10 @@ def query_lookup(query, start_index=0, end_index=10):
   #order, limit, and offset parts of query
   matching_files.order_by('filename')[start_index:end_index]
   file_dicts = construct_file_dict(matching_files)
-  data = {'search_results': file_dicts}
+  return wrap_data(file_dicts)
+
+def wrap_data(file_dicts):
+  return {'search_results': file_dicts}
 
 def construct_file_dict(matching_files):
 

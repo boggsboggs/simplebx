@@ -6,7 +6,7 @@ from django.conf.urls import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('download.views',
-    url(r'^search/$', 'search', {'initial-query':''}, name='search'),
+    url(r'^search/$', 'search', {'initial_query':''}, name='search'),
     url(r'^search/(?P<initial_query>(\w|.)*)/$', 'search', name='search-initial'),
     url(r'^search/query/$', 'query', name='query'),
     url(r'^get/(?P<filename>(\w|.)+)/', 'getfile', name='getfile')
