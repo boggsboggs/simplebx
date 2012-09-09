@@ -1,16 +1,16 @@
 $(function(){
   (function($, _){
-      $('#search').css('visibility', 'hidden');
-      $('#upload').css('visibility', 'hidden');
-      $('#search-btn').click(function(){
-        $('#search').css('visibility', 'visible');
-        $('#upload').css('visibility', 'hidden');
+      $('#getafile').css('visibility', 'hidden');
+      $('#giveafile').css('visibility', 'hidden');
+      $('#getafile-btn').click(function(){
+        $('#getafile').css('visibility', 'visible');
+        $('#giveafile').css('visibility', 'hidden');
       });
-      $('#upload-btn').click(function(){
-        $('#upload').css('visibility', 'visible');
-        $('#search').css('visibility', 'hidden');
+      $('#giveafile-btn').click(function(){
+        $('#giveafile').css('visibility', 'visible');
+        $('#getafile').css('visibility', 'hidden');
       });
-  
+
     function post_to_server(filename, file_contents){
       console.log("filename: " + filename + "\nfile contents: " + file_contents);
 
@@ -22,7 +22,7 @@ $(function(){
 
       $.post(URL, post_data);
     }
-    
+
     function read_file(file_obj, encrypt, password, callback) {
       on_completion = function(evt) {
           var file_name = file_obj.name;
@@ -41,7 +41,7 @@ $(function(){
     function submit_click_handler() {
       var file = document.getElementById('fileinput').files[0];
       if (file) {
-          var encrypt = $('#chkSelect').attr('checked')?true:false;
+          var encrypt = $('#encrypt').attr('checked')==='checked';
           var password =$('#password').value;
 
           console.log("encrypt: " + encrypt + "\npassword: " + password);
@@ -66,16 +66,29 @@ $(function(){
     }
 
     function encrypt_change_handler() {
-      var box_checked = $('#chkSelect').attr('checked')?true:false;
+      var box_checked;
+      if ($('#encrypt').attr('checked')==='checked'){
+        box_checked = true;
+      }
+      else{
+        box_checked = false;
+      }
       if (box_checked) {
         $('#password-p').show();
         $('#password').select();
       }
       else {
-        $('#encrypt').prop('checked', 'unchecked');
         $('#password-p').hide();
       }
     }
+
+    $('#search-text').keypress(function(e){
+      var code = e.keycode || e.which;
+      if(code==13){
+        text = $('#search-text').val();
+        window.open('/download/search/'+text+'/');
+      }
+    });
 
 
 
@@ -86,6 +99,6 @@ $(function(){
 
   }(window.jQuery, window._));
 });
-            
+
 
 

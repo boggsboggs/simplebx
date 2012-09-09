@@ -8,7 +8,7 @@
     <meta name="author" content="">
 
     <!-- Le styles -->
-    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="{{STATIC_URL}}bootstrap/css/bootstrap.css" rel="stylesheet">
     <style type="text/css">
       body {
         padding-top: 60px;
@@ -26,11 +26,11 @@
       }
 
     </style>
-    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="{{STATIC_URL}}bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 
-    <link href="{{STATIC_URL}}css/jasny-bootstrap.css" rel="stylesheet">
+   <!--  <link href="{{STATIC_URL}}css/jasny-bootstrap.css" rel="stylesheet">
     <link href="{{STATIC_URL}}css/jasny-bootstrap-responsive.css" rel="stylesheet">
-
+ -->
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -57,9 +57,8 @@
           <a class="brand" href="{% url home %}">Simplebox</a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li class="active"><a href="http://twitter.github.com/bootstrap/examples/hero.html#">Home</a></li>
-              <li><a href="http://twitter.github.com/bootstrap/examples/hero.html#about">About</a></li>
-              <li><a href="http://twitter.github.com/bootstrap/examples/hero.html#contact">Contact</a></li>
+              <li class="active"><a href="{% url home %}">Home</a></li>
+              <li><a href="{% url search %}">Download</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -90,7 +89,7 @@
     <script src="{{STATIC_URL}}js/bootstrap-carousel.js"></script>
     <script src="{{STATIC_URL}}js/bootstrap-typeahead.js"></script>
     <script src="{{STATIC_URL}}js/bootstrap-fileupload.js"></script>
-    
+
 
     <script type="text/javascript">
       $('.fileupload').fileupload();
@@ -98,10 +97,11 @@
 
     <script type="text/javascript" src="{{STATIC_URL}}js/sjcl.js"></script>
     <script type="text/javascript" src="http://underscorejs.org/underscore.js"></script>
+    <script type="text/javascript" src="http://backbonejs.org/backbone.js"></script>
 
     {% block js %}
     {% endblock js %}
-  
+
 
 
 

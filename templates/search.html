@@ -19,13 +19,13 @@
     <table class="table" id="data-table" >
     <thead>
       <tr>
-        <th> Matched Files </th>        
+        <th> Matched Files </th>
       </tr>
     </thead>
     <tbody>
-      
+
     </tbody>
- 
+
 
   </table>
   </div>
@@ -36,10 +36,17 @@
 
 {% block js %}
 <script id="search-result-template" type="text/template">
-  <tr> 
+  <tr>
 
     <td><img src="{{STATIC_URL}}ico/document.ico" width="44" height="45"/></td>
-    <td> <%= filename %> </td>
+    <td>
+      <a class="filelink" href=<%= link %> is_encrypted=<% is_encrypted %>>
+        <%= filename %>
+      </a>
+    </td>
+    <td><input id="input-decrypt" placeholder="Decryption Password...">  </input></td>
+
+
   </tr>
 </script>
 

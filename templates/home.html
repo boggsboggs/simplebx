@@ -12,60 +12,51 @@
 
       <!-- Example row of columns -->
       <div class="row">
-        <div class="span2 offset4">
-          <p><a id="upload-btn" class="btn btn-inverse btn-large">Give a file</a></p>
-            
-           
+        <div class="span4">
+          <p><a id="giveafile-btn" class="btn btn-inverse btn-large">Give a file</a></p>
+
+
         </div>
-        <div class="span3">
-          
-          <p><a id="search-btn" class="btn btn-inverse btn-large">Get a file</a></p>
-         
+        <div class="span4">
+
+          <p><a id="getafile-btn" class="btn btn-inverse btn-large">Get a file</a></p>
+
        </div>
-       
+
       </div>
 
     </br> </br>
       <div class="row">
 
-        <div class="span4 offset2">
-          <!-- Upload a File -->
-          <p>
-            Select a File: <input id="fileinput" type="file" />
-          </p>
-          <p>
-            Upload Name: <input id="filename" type="text" />
-          </p>
-          <p>
-            Encrypt the Uploaded File: <input id="encrypt" type="checkbox" value="encrypt" />
-          </p>
-          <p id="password-p" display="none" style="display: none;">
-            Password: <input id="password" type="password" />
-          </p>
-          <p>
-            <input id="submit-button" type="button" value="Upload" />
-          </p>
+        <div class="span4">
+          <div class="fileupload fileupload-new" data-provides="fileupload" id="giveafile" visibility="hidden">
+            <!-- Upload a File -->
+            <p> Select a File: <input id="fileinput" type="file" /></p>
+            <p> Upload Name: <input id="filename" type="text" /> </p>
+            <p> Encrypt the Uploaded File: <input id="encrypt" type="checkbox" value="encrypt" /> </p>
+            <p id="password-p" display="none" style="display: none;">
+              Password: <input id="password" type="password" />
+            </p>
+            <p> <input id="submit-button" type="button" value="Upload" /> </p>
 
-              <div class="fileupload fileupload-new" data-provides="fileupload" id="upload" visibility="hidden">
+            <div class="input-append">
+                <div class="uneditable-input span2">
+                  <i class="icon-file fileupload-exists"></i>
+                   <span class="fileupload-preview"></span
+                ></div>
+                <span class="btn btn-file">
+                  <span class="fileupload-new">Select file</span>
+                  <span class="fileupload-exists">Change</span>
 
-                <div class="input-append">
-                    <div class="uneditable-input span2">
-                      <i class="icon-file fileupload-exists"></i>
-                       <span class="fileupload-preview"></span
-                    ></div>
-                    <span class="btn btn-file">
-                      <span class="fileupload-new">Select file</span>
-                      <span class="fileupload-exists">Change</span>
-                     
-                    </span>
-                    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
-                </div>
-              </div>
+                </span>
+                <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+            </div>
+          </div>
         </div>
 
-        <div class="span3" >
-           <div class='input-append' id="search" visibility="hidden">
-            <input placeholder="Search..." />
+        <div class="span4" >
+           <div class='input-append' id="getafile" visibility="hidden">
+            <input id="search-text" type="text" placeholder="Press Enter to Search..." />
             <button class='btn add-on'>
               <i class="icon-search"></i>
            </button>

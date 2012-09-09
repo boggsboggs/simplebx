@@ -6,9 +6,10 @@ from django.conf.urls import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('download.views',
-    url(r'^search/$', 'search', name='search'),
+    url(r'^search/$', 'search', {'initial-query':''}, name='search'),
+    url(r'^search/(?P<initial_query>(\w|.)*)/$', 'search', name='search-initial'),
     url(r'^search/query/$', 'query', name='query'),
-    url(r'get/', 'getfile', name='getfile',)
+    url(r'^get/(?P<filename>(\w|.)+)/', 'getfile', name='getfile')
     # url(r'^simplebx/', include('simplebx.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
